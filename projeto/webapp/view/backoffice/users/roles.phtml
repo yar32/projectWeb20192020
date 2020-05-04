@@ -1,0 +1,49 @@
+<?php
+use ArmoredCore\WebObjects\Asset;
+use ArmoredCore\WebObjects\Layout;
+use ArmoredCore\WebObjects\URL;
+
+Layout::includeLayout('header');
+Layout::includeLayout('sidebar'); ?>
+    <style>
+        i {
+            cursor: pointer;
+        }
+        .fa-eye {
+            color: #39afff;
+        }
+        .fa-trash-o{
+            color: #ff5853;
+        }
+    </style>
+    <div class="content">
+        <div class="container">
+         <table  class="table table-hover" style="margin-top:20px ">
+                <thead>
+                <tr>
+                    <th class="text-center" colspan="100%">Roles</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th colspan="100&" style="background-color: #a6ff73; color: white" class="text-center"><i class="fa fa-plus"></i> Create new</th>
+                </tr>
+                <tr>
+                    <th>Admin</th>
+
+                    <th><i class="fa fa-trash-o"></i></th>
+                </tr>
+                <tr>
+                    <td>User</td>
+
+                    <td><i class="fa fa-trash-o"></i></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+<?php Layout::includeLayout("footerBackend");
+

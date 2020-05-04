@@ -1,0 +1,71 @@
+<?php
+
+use ArmoredCore\WebObjects\Asset;
+use ArmoredCore\WebObjects\Layout;
+use ArmoredCore\WebObjects\URL;
+
+Layout::includeLayout('header') ?>
+
+    <!-- container -->
+    <div class="container" >
+        <div class="row">
+
+            <article class="col-xs-12 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Jogo</h1>
+                </header>
+
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="background-image: url(<?=Asset::image('bg_game.jpg')?>)">
+                    <div class="col-md-3">
+                        <?php
+                        for($i=1;$i<10;$i++)
+                        {
+                            ?>
+                            <div class="row" style="height: 50%">
+
+                                <div class="box">
+                                    <div class="bg_number img-circle">
+                                        <span class="number"><?=$i?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+
+                        ?>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row btn-center" >
+
+                            <button  class="btn-danger btn">Começar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <?php
+                        for($i=1;$i<10;$i++)
+                        {
+                            ?>
+                            <div class="row" style="height: 50%">
+
+                                <div class="box" style="float: right">
+                                    <div class="bg_number img-circle">
+                                        <span class="number"><?=$i?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+
+                        ?>
+                    </div>
+                </div>
+
+            </article>
+
+
+
+
+        </div>
+    </div>	<!-- /container -->
+
+<?php Layout::includeLayout('footer') ?>

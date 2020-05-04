@@ -1,0 +1,110 @@
+<?php
+
+use ArmoredCore\WebObjects\Asset;
+use ArmoredCore\WebObjects\Layout;
+use ArmoredCore\WebObjects\URL;
+
+Layout::includeLayout('header') ?>
+
+    <!-- container -->
+    <div class="container" >
+        <div class="row">
+
+            <article class="col-xs-12 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Jogo</h1>
+                </header>
+
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="background-image: url(<?=Asset::image('bg_game.jpg')?>)">
+                    <div class="col-md-3">
+                        <?php
+                        for($i=1;$i<10;$i++)
+                        {
+                            ?>
+                            <div class="row" style="height: 50%">
+
+                                <div class="box">
+                                    <div class="bg_number img-circle">
+                                        <span class="number"><?=$i?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+
+                        ?>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row" style="margin-top: 5%">
+                            <div class="col-md-6">
+                                <img src="<?=Asset::image("player.png")?>">
+                            </div>
+
+                            <div class="col-md-6">
+                                <img src="<?=Asset::image("computer.png")?>">
+                            </div>
+                        </div>
+                        <div class="row" style="color: white;">
+                            <div class="col-md-6" >
+                                <div class="btn-center" style="margin-top: 5%">
+                                    <div style="background-color: #00af00;border: 3px solid #a74d06" class="box">
+                                        <b>0</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="btn-center" style="margin-top: 5%">
+                                    <div style="background-color: #00af00;border: 3px solid #a74d06" class="box">
+                                        <b>0</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="color: white">
+                           <div class="btn-center" style="margin-top: 10%">
+                               <button  class="btn btn-info">Jogar dados</button>
+                           </div>
+                        </div>
+                        <div class="row">
+                            <div class="btn-center" style="margin-top: 10%">
+                                <img src="<?=Asset::image("dice_red/1.png")?>">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="btn-center" style="margin-top: 10%">
+                                <img src="<?=Asset::image("dice_red/1.png")?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <?php
+                        for($i=1;$i<10;$i++)
+                        {
+                            ?>
+                            <div class="row" style="height: 50%">
+
+                                <div class="box" style="float: right">
+                                    <div class="bg_number img-circle">
+                                        <span class="number"><?=$i?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+
+                        ?>
+                    </div>
+
+
+
+                </div>
+
+            </article>
+
+
+
+
+        </div>
+    </div>	<!-- /container -->
+
+<?php Layout::includeLayout('footer') ?>

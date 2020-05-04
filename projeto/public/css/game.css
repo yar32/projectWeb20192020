@@ -1,0 +1,26 @@
+.box{
+    margin: 5%;
+    width:40px;
+    height: 40px ;
+    background-color: rgba(0,0,0,0.19);
+    padding:3%;
+    cursor: pointer;
+}
+.bg_number{
+    text-align: center;
+    background-color: white;
+    width:100%;
+    height: 100% ;
+}
+.number{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+.btn-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 100%;
+}

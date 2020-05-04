@@ -1,0 +1,49 @@
+<?php
+use ArmoredCore\WebObjects\Asset;
+use ArmoredCore\Facades\AssetBundler;
+use ArmoredCore\WebObjects\URL;
+?>
+<head>
+    <link rel="stylesheet" href="<?= Asset::css('/sidebar.css')?>" media="screen" >
+    <script src="<?= Asset::js("sidebar.js")?>"></script>
+</head>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+        <div class="wrapper">
+            <div class="side-bar">
+                <ul>
+                    <li class="menu-head">
+                       Jogo <a href="#" class="push_menu"><span onclick="togglesidebar()" class="glyphicon glyphicon-align-justify pull-right"></span></a>
+                    </li>
+                    <div class="menu">
+                        <li>
+                            <a href="<?=URL::toRoute("backoffice/home")?>">Home <span class="fa fa-home pull-right"></span></a>
+                        </li>
+                        <li>
+                            <a href="<?=URL::toRoute("backoffice/allusers")?>">Users <span class="fa fa-user pull-right"></span></a>
+                        </li>
+                        <li>
+                            <a href="<?=URL::toRoute("backoffice/roles")?>" >Roles <span class="fa fa-user pull-right"></span></a>
+                        </li>
+                    </div>
+
+                </ul>
+            </div>
+
+
+
+
+<script>
+
+        var local=$(location).attr('pathname');
+        if(local.includes("allusers")){
+            $(".menu li:eq(1) a").addClass("active");
+        }if(local.includes("roles")){
+            $(".menu li:eq(2) a").addClass("active");
+        }
+
+</script>
