@@ -1,10 +1,14 @@
 <?php
 use ArmoredCore\WebObjects\Asset;
+use ArmoredCore\WebObjects\Data;
 use ArmoredCore\WebObjects\Layout;
 use ArmoredCore\WebObjects\URL;
 
 Layout::includeLayout('header');
-Layout::includeLayout('sidebar'); ?>
+Layout::includeLayout('sidebar');
+$roles = Data::get("roles");
+
+?>
     <style>
         i {
             cursor: pointer;
@@ -28,16 +32,17 @@ Layout::includeLayout('sidebar'); ?>
                 <tr>
                     <th colspan="100&" style="background-color: #a6ff73; color: white" class="text-center"><i class="fa fa-plus"></i> Create new</th>
                 </tr>
-                <tr>
-                    <th>Admin</th>
+                <?php
+                foreach ($roles as $role){
+                    ?>
+                    <tr>
+                        <td><?=$role->name?></td>
+                        <td><i class="fa fa-trash-o"></i></td>
+                    </tr>
 
-                    <th><i class="fa fa-trash-o"></i></th>
-                </tr>
-                <tr>
-                    <td>User</td>
-
-                    <td><i class="fa fa-trash-o"></i></td>
-                </tr>
+                    <?php
+                }
+                ?>
                 </tbody>
             </table>
         </div>

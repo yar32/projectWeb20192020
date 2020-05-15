@@ -1,6 +1,7 @@
 <?php
 use ArmoredCore\WebObjects\Asset;
 use ArmoredCore\Facades\AssetBundler;
+use ArmoredCore\WebObjects\Session;
 use ArmoredCore\WebObjects\URL;
 ?>
 
@@ -41,8 +42,24 @@ use ArmoredCore\WebObjects\URL;
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
-                <li><a class="btn" href="<?= URL::toRoute('user/login')?>">SIGN IN </a></li>
-                <li><a class="btn" href="<?= URL::toRoute('user/register')?>">SIGN UP</a></li>
+                <li><a href="<?= URL::toRoute('home/top')?>">Top 10</a></li>
+                <?php
+                if(Session::has("userid"))
+                {
+                    ?>
+                    <li><a href="<?= URL::toRoute('user/profile',Session::get("userid"))?>">Welcome <?=User::find(Session::get("userid"))->username?></a></li>
+                    <li><a class="btn" href="<?= URL::toRoute('user/logout')?>">LOGOUT </a></li>
+                    <?php
+                }
+                else
+                {
+                    ?>
+                    <li><a class="btn" href="<?= URL::toRoute('user/login')?>">SIGN IN </a></li>
+                    <li><a class="btn" href="<?= URL::toRoute('user/register')?>">SIGN UP</a></li>
+                <?php
+                }
+                ?>
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>

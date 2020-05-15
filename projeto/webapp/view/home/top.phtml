@@ -1,0 +1,72 @@
+<?php
+use ArmoredCore\WebObjects\Layout;
+use ArmoredCore\WebObjects\URL;
+
+Layout::includeLayout('header') ?>
+    <style>
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%; /* Footer height */
+        }
+    </style>
+    <!-- container -->
+    <div class="container">
+        <div class="row">
+
+            <!-- Article main content -->
+            <article class="col-xs-12 maincontent">
+                <header class="page-header">
+                    <h1 class="page-title">Top</h1>
+                </header>
+
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" colspan="100%">Top 10</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Position</td>
+                                    <td>Username</td>
+                                    <td>Score</td>
+                                </tr>
+                                <tr>
+                                    <td>Position</td>
+                                    <td>Username</td>
+                                    <td>Score</td>
+                                </tr>
+                                <tr>
+                                    <td>Position</td>
+                                    <td>Username</td>
+                                    <td>Score</td>
+                                </tr>
+                                <tr>
+                                    <td>Position</td>
+                                    <td>Username</td>
+                                    <td>Score</td>
+                                </tr>
+                                <tr style="background-color: #ffff65">
+                                    <td>Position</td>
+                                    <td>Username</td>
+                                    <td>Score</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </article>
+            <!-- /Article -->
+
+        </div>
+    </div>	<!-- /container -->
+
+<?php Layout::includeLayout('footer') ?>

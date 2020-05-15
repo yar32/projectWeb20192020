@@ -23,6 +23,11 @@ class HomeController extends BaseController
         //View::attachSubView('titlecontainer', 'layout.pagetitle', ['title' => 'Quick Start']);
         return View::make('home.start');
     }
+    public function top(){
+
+        //View::attachSubView('titlecontainer', 'layout.pagetitle', ['title' => 'Quick Start']);
+        return View::make('home.top');
+    }
 
 
 
