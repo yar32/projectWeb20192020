@@ -4,7 +4,27 @@
     height: 40px ;
     background-color: rgba(0,0,0,0.19);
     padding:3%;
+}.box-blocked{
+    margin: 5%;
+    width:40px;
+    height: 40px ;
+    background-color: rgba(0,0,0,0.19);
+    padding:3%;
+}
+.box-active-blue{
+    margin: 5%;
+    width:40px;
+    height: 40px ;
+    background-color: rgb(81, 204, 255);
+    padding:3%;
     cursor: pointer;
+}
+.box-active-red{
+    margin: 5%;
+    width:40px;
+    height: 40px ;
+    background-color: rgb(255, 55, 56);
+    padding:3%;
 }
 .bg_number{
     text-align: center;

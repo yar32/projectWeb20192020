@@ -1,10 +1,13 @@
 <?php
 
 use ArmoredCore\WebObjects\Asset;
+use ArmoredCore\WebObjects\Data;
 use ArmoredCore\WebObjects\Layout;
 use ArmoredCore\WebObjects\URL;
 
-Layout::includeLayout('header') ?>
+Layout::includeLayout('header');
+$game = Data::get("game");
+?>
 
     <!-- container -->
     <div class="container" >
@@ -18,14 +21,15 @@ Layout::includeLayout('header') ?>
                 <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="background-image: url(<?=Asset::image('bg_game.jpg')?>)">
                     <div class="col-md-3">
                         <?php
-                        for($i=1;$i<10;$i++)
+                        foreach($game->numbersPlayer1->numbers as $key=>$nums)
                         {
                             ?>
                             <div class="row" style="height: 50%">
-
-                                <div class="box">
+                                <div id="PL1num<?=$key?>" <?php if($game->action=='number' && $game->playing==1)
+                                   echo 'onclick="blockNumbers('.$key.','.($game->dice1->number+$game->dice2->number).','."'player1'".','."'".URL::toRoute("game/blocknums")."'".')"'?>
+                                     class="<?=$nums==false?'box-active-blue':'box-blocked' ?>">
                                     <div class="bg_number img-circle">
-                                        <span class="number"><?=$i?></span>
+                                        <span class="number"><?=$key?></span>
                                     </div>
                                 </div>
                             </div>
@@ -62,17 +66,19 @@ Layout::includeLayout('header') ?>
                         </div>
                         <div class="row" style="color: white">
                            <div class="btn-center" style="margin-top: 10%">
-                               <button  class="btn btn-info">Jogar dados</button>
+                               <button onclick="window.location.href = '<?=URL::toRoute("game/dice")?>'"  class="btn btn-info" <?php if($game->action=="number")echo "disabled"?>>Jogar dados</button>
                            </div>
                         </div>
-                        <div class="row">
-                            <div class="btn-center" style="margin-top: 10%">
-                                <img src="<?=Asset::image("dice_red/1.png")?>">
+                        <div id="dices">
+                            <div class="row">
+                                <div class="btn-center" style="margin-top: 10%">
+                                    <img src="<?=Asset::image("dice_red/".$game->dice1->number.".png")?>">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="btn-center" style="margin-top: 10%">
-                                <img src="<?=Asset::image("dice_red/1.png")?>">
+                            <div class="row">
+                                <div class="btn-center" style="margin-top: 10%">
+                                    <img src="<?=Asset::image("dice_red/".$game->dice2->number.".png")?>">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,7 +89,7 @@ Layout::includeLayout('header') ?>
                             ?>
                             <div class="row" style="height: 50%">
 
-                                <div class="box" style="float: right">
+                                <div class="box-active-red" style="float: right">
                                     <div class="bg_number img-circle">
                                         <span class="number"><?=$i?></span>
                                     </div>
@@ -108,3 +114,5 @@ Layout::includeLayout('header') ?>
     </div>	<!-- /container -->
 
 <?php Layout::includeLayout('footer') ?>
+<script src="<?= Asset::js('game.js')?>"></script>
+

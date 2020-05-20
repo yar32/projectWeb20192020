@@ -32,6 +32,8 @@ Router::get("user/ban","UserController/destroy");
 //Game
 Router::get('game/index',	'GameController/index');
 Router::get('game/game',	'GameController/game');
+Router::get('game/dice',	'GameController/dice');
+Router::post('game/blocknums',	'GameController/blocknums');
 
 //ajax
 Router::post('ajax/infouser',"AjaxController/infouser");
