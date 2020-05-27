@@ -1,0 +1,30 @@
+<?php
+
+use ArmoredCore\WebObjects\Data;
+use ArmoredCore\WebObjects\URL;
+$users= Data::get("users");
+if($users == null){?>
+    <tr>
+        <th colspan="100%" class="text-center">Resultados não encontrados</th>
+    </tr>
+
+    <?php
+}
+foreach ($users as $user){
+    ?>
+    <tr>
+        <td><?=$user->username?></td>
+        <td><?=$user->email?></td>
+        <td><?=$user->name?></td>
+        <td>
+            <i class="fa fa-eye fa-2x" data-toggle="modal" data-target="#infoUser" onclick="showUserInformation('<?=URL::toRoute("ajax/infouser")?>',<?=$user->iduser?>)"></i>
+            <?php if($user->activeted==1) { ?>
+                <i class="fa fa-ban fa-2x" data-toggle="modal" data-target="#banedUsermodal" onclick="bannedUser('<?=URL::toRoute("ajax/banuser")?>',<?=$user->iduser?>)"></i>
+            <?php  } else { ?>
+                <i class="fa fa-check-circle-o fa-2x" data-toggle="modal" data-target="#banedUsermodal" onclick="unbannedUser('<?=URL::toRoute("ajax/unbanuser")?>',<?=$user->iduser?>)"></i>
+            <?php } ?>
+        </td>
+    </tr>
+    <?php
+}
+?>

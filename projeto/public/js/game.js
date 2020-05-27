@@ -1,4 +1,5 @@
 var blockednums=[];
+//temporary block numbers
 function blockNumbers(num,total,player,url){
     var index=blockednums.indexOf(num);
     console.log("Index:"+index);
@@ -39,8 +40,6 @@ function blockNumbers(num,total,player,url){
         }).done(function () {
           window.location.href=window.location.href;
         });
-
-
     }
     else{
         console.log("Fazendo");

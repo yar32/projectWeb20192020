@@ -10,6 +10,7 @@ Layout::includeLayout('sidebar');
 
 $users = Data::get("users");
 ?>
+
 <style>
     i {
         cursor: pointer;
@@ -17,15 +18,24 @@ $users = Data::get("users");
     .fa-eye {
         color: #39afff;
     }
-    .fa-trash-o{
+    .fa-ban{
         color: #ff5853;
+    }
+    .fa-check-circle-o{
+        color: #8bff6d;
     }
 </style>
     <div class="content">
         <div class="container">
 
+                <div class="row" style="margin-top:20px ">
+                    <div class="col-xs-6">
+                        <input id="search_user" onkeyup="searchuser('<?=URL::toRoute("ajax/finduser")?>')" type="text" class="form-control" placeholder="Procurar....">
+                    </div>
+                </div>
 
-        <table id="allusers" class="table" style="margin-top:20px ">
+
+        <table id="allusers" class="table" >
             <thead>
                 <tr>
                     <th colspan="100%">Users</th>
@@ -41,7 +51,11 @@ $users = Data::get("users");
                         <td><?=$user->name?></td>
                         <td>
                             <i class="fa fa-eye fa-2x" data-toggle="modal" data-target="#infoUser" onclick="showUserInformation('<?=URL::toRoute("ajax/infouser")?>',<?=$user->iduser?>)"></i>
-                            <i class="fa fa-trash-o fa-2x" data-toggle="modal" data-target="#banedUsermodal" onclick="bannedUser('<?=URL::toRoute("ajax/banuser")?>',<?=$user->iduser?>)"></i>
+                            <?php if($user->activeted==1) { ?>
+                                <i class="fa fa-ban fa-2x" data-toggle="modal" data-target="#banedUsermodal" onclick="bannedUser('<?=URL::toRoute("ajax/banuser")?>',<?=$user->iduser?>)"></i>
+                            <?php  } else { ?>
+                                <i class="fa fa-check-circle-o fa-2x" data-toggle="modal" data-target="#banedUsermodal" onclick="unbannedUser('<?=URL::toRoute("ajax/unbanuser")?>',<?=$user->iduser?>)"></i>
+                            <?php } ?>
                         </td>
                     </tr>
                     <?php

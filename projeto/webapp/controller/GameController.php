@@ -31,32 +31,62 @@ class GameController extends BaseController
         }
         else{
             $game=Session::get("game");
+            //Session::remove("game");
         }
-        if($game->playing==0){
+        if($game->playing==-1){
+
             if($game->action=="dice"){
                 $game->generatedices();
-                if(!$game->checkplay()){
+                if(!$game->canplay()){
                     $game->finish();
-                }
-                else
-                {
-                    $game->action="number";
+                    //Add to History
+                    /*$history= new Historygame();
+                    if($game->totalPL1 < $game->totalPL2)
+                    {
+                        $history->gamestate=1;
+                        $history->points=($game->numbersPlayer1->sumBlocked()-$game->numbersPlayer2->sumBlocked());
+                    }
+
+                    if($game->totalPL1 > $game->totalPL2)
+                    {
+                        $history->gamestate=-1;
+                        $history->points=0;
+                    }
+                    if($game->totalPL1 == $game->totalPL2)
+                    {
+                        $history->gamestate=0;
+                        $history->points=0;
+                    }
+                    $history->iduser=Session::get("userid");
+                    if($history->is_valid()){
+                        $history->save();
+                    }*/
+
+
+
+                    Session::remove("game");
                     return View::make("game.game",["game"=>$game]);
                 }
+                else{
+                    //View::make("game.game",["game"=>$game]);
+                    //sleep(5);
+                    //return Redirect::toRoute("game/game");
+                }
             }
-            else
+            if($game->action=="number")
             {
                 $game->numbersPlayer2->PCblockNumber($game->dice1->number+$game->dice2->number);
-                if(!$game->checkplay()){
-                    $game->finish();
-                }
-                else
-                {
-                    $game->action="number";
-                    return View::make("game.game",["game"=>$game]);
-                }
+                $game->action="dice";
+                //View::make("game.game",["game"=>$game]);
+                //sleep(5);
+                //return Redirect::toRoute("game/game");
             }
-
+            return View::make("game.game",["game"=>$game]);
+        }
+        //If erro in finish game
+        if(Session::has("game") && $game->playing==null){
+            Session::remove("game");
+            return Redirect::toRoute("game/game");
         }
         return View::make("game.game",["game"=>$game]);
     }
@@ -64,13 +94,13 @@ class GameController extends BaseController
     public function dice(){
         $game=Session::get("game");
         $game->generatedices();
-        if(!$game->checkplay()){
+        if(!$game->canplay()){
             $game->nextplayer();
         }
-        //TODO:change for Next player
         return Redirect::toRoute("game/game");
     }
 
+    //Ajax
     public function blocknums(){
         $game=Session::get("game");
         if(Post::get("player")=="player1"){

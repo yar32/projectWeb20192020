@@ -11,6 +11,8 @@ class Game
     public $numbersPlayer2;
     public $action;
     public $playing;
+    public $totalPL1;
+    public $totalPL2;
     //Start game
     public function Game()
     {
@@ -20,6 +22,8 @@ class Game
         $this->dice2=new Dice();
         $this->numbersPlayer1 = new Numbers();
         $this->numbersPlayer2 = new Numbers();
+        $this->totalPL1=null;
+        $this->totalPL2=null;
     }
 
 
@@ -30,48 +34,41 @@ class Game
         $this->dice2->generate();
         $this->action="number";
     }
+    //Validate if can play
+    public function canplay(){
+        if($this->playing==1)
+        {
+            //Get all sum possibilitis
+            $totalUnblockedNums=$this->numbersPlayer1->sum_possibilitis();
+            $totalDices=$this->dice1->number + $this->dice2->number;
+            //Search in possibilitis if have sum igual to sum of dices
+            $posibility=array_search($totalDices,$totalUnblockedNums);
 
-    public function checkplay(){
-        $UnblockedNums=array();
-        foreach ($this->numbersPlayer1->numbers as $key=>$blocked){
-            if(!$blocked){
-                array_push($UnblockedNums,$key);
-            }
         }
-        $totalDices=$this->dice1->number + $this->dice2->number;
-        $totalUnblockedNums=$this->sum_possiblilitis($UnblockedNums);
-        $posibility=array_search($totalDices,$totalUnblockedNums);
-
+        else{
+            $totalUnblockedNums=$this->numbersPlayer2->sum_possibilitis();
+            $totalDices=$this->dice1->number + $this->dice2->number;
+            $posibility=array_search($totalDices,$totalUnblockedNums);
+        }
         if($posibility==null){
             return false;
         }
         return true;
-
-
     }
-
+    //Go to next player
     public function nextplayer(){
-        $this->playing=0;
+        /// -1 : Computer
+        /// 1 : Player 1
+        /// 2 : Player 2 (no implemented)
+        $this->playing=-1;
     }
     //Finish game
     public function finish(){
+        $this->action=null;
+        $this->playing=null;
+        $this->totalPL1=$this->numbersPlayer1->sumUnblocked();
+        $this->totalPL2=$this->numbersPlayer2->sumUnblocked();
 
     }
 
-
-
-    private function sum_possiblilitis($array) {
-        // initialize by adding the empty set
-        $results = array(array( ));
-
-        foreach ($array as $element)
-            foreach ($results as $combination)
-                array_push($results, array_merge(array($element), $combination));
-
-        $sums = array();
-        foreach ($results as $result){
-            array_push($sums,array_sum($result));
-        }
-        return array_unique($sums);
-    }
 }

@@ -11,17 +11,20 @@ use ArmoredCore\WebObjects\View;
 class UserController extends BaseController implements ResourceControllerInterface
 {
     public function login(){
-        return View::make("users.login");
+        if(!Session::has("userid"))
+            return View::make("users.login");
+        else
+            return Redirect::toRoute("home/index");
     }
     public function makelogin(){
 
         $user=User::find_by_username(Post::get("username"));
         if(!empty($user)){
-            if($user->password==Post::get("password"))
+            $ecrypted_password=$user->readPassword(Post::get("password"));
+            if($user->password== $ecrypted_password)
             {
                 if($user->activeted == 1)
                 {
-
                     $this->userSessions($user->iduser,"role");
                     return Redirect::toRoute("home/");
                 }
@@ -38,13 +41,11 @@ class UserController extends BaseController implements ResourceControllerInterfa
 
     public function backusers(){
         $users=User::all();
+        //\Tracy\Debugger::barDump($users->roles);
         return View::make("backoffice.users.allusers",["users"=>$users]);
 
     }
-    public function roles(){
-        $roles=Role::all();
-        return View::make("backoffice.users.roles",["roles"=>$roles]);
-    }
+
 
     /**
      * index (default route)
@@ -71,7 +72,10 @@ class UserController extends BaseController implements ResourceControllerInterfa
      */
     public function create()
     {
-        return View::make("users.register");
+        if(!Session::has("userid"))
+            return View::make("users.register");
+        else
+            return Redirect::toRoute("home/index");
     }
 
     /**
@@ -105,6 +109,8 @@ class UserController extends BaseController implements ResourceControllerInterfa
         //Todo: erro no validade unique
         if($user->is_valid() && $user->validadePassword(Post::get("password"),Post::get("confpassword"))){
             $user->save();
+            $user=User::find_by_username($user->username);
+            $this->userSessions($user->iduser,"User");
             return Redirect::toRoute("home/index");
         }
         else{
@@ -123,7 +129,10 @@ class UserController extends BaseController implements ResourceControllerInterfa
 
     public function edit($id)
     {
-
+        $user=User::first($id);
+        $user->activeted=1;
+        $user->save();
+        return Redirect::toRoute("backoffice/allusers");
     }
 
     public function update($id)

@@ -109,23 +109,23 @@ $errors= Data::get("errors");
                 <h4>A preencher so os campos que quere alterar</h4>
                 <form id="formEditUser" action="<?=URL::toRoute("user/edit",$user->iduser)?>" method="post">
                     <div class="top-margin">
-                        <label>Nome Completo <span class="text-danger">*</span></label>
+                        <label>Nome Completo </label>
                         <input type="text" name="name" class="form-control" placeholder="<?=$user->name?>">
                     </div>
                     <div class="top-margin">
-                        <label>Data Nascimento <span class="text-danger">*</span></label>
+                        <label>Data Nascimento</label>
                         <input type="date" name="birthdate" class="form-control">
                     </div>
                     <div class="top-margin">
-                        <label>Email <span class="text-danger">*</span></label>
+                        <label>Email</label>
                         <input type="text" name="email" class="form-control" placeholder="<?=$user->email?>">
                     </div>
                     <div class="top-margin">
-                        <label>Password <span class="text-danger">*</span></label>
+                        <label>Password</label>
                         <input type="password" name="password" class="form-control">
                     </div>
                     <div class="top-margin">
-                        <label>Confirma password <span class="text-danger">*</span></label>
+                        <label>Confirma password</label>
                         <input type="password" name="confpassword" class="form-control">
                     </div>
                 </form>

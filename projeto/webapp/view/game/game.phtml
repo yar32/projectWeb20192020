@@ -7,6 +7,7 @@ use ArmoredCore\WebObjects\URL;
 
 Layout::includeLayout('header');
 $game = Data::get("game");
+
 ?>
 
     <!-- container -->
@@ -25,7 +26,7 @@ $game = Data::get("game");
                         {
                             ?>
                             <div class="row" style="height: 50%">
-                                <div id="PL1num<?=$key?>" <?php if($game->action=='number' && $game->playing==1)
+                                <div id="PL1num<?=$key?>" <?php if($game->action=='number' && $game->playing==1 && $nums==false)
                                    echo 'onclick="blockNumbers('.$key.','.($game->dice1->number+$game->dice2->number).','."'player1'".','."'".URL::toRoute("game/blocknums")."'".')"'?>
                                      class="<?=$nums==false?'box-active-blue':'box-blocked' ?>">
                                     <div class="bg_number img-circle">
@@ -41,34 +42,41 @@ $game = Data::get("game");
                     <div class="col-md-6">
                         <div class="row" style="margin-top: 5%">
                             <div class="col-md-6">
-                                <img src="<?=Asset::image("player.png")?>">
+                                <img src="<?=Asset::image("player.png")?>"><br>
+                                <?php if($game->playing==1) echo "<p class='text-center'><b>Jogando...</b></p>";?>
                             </div>
 
                             <div class="col-md-6">
-                                <img src="<?=Asset::image("computer.png")?>">
+                                <img src="<?=Asset::image("computer.png")?>"><br>
+                                <?php if($game->playing!=1) echo "<p class='text-center'><b>Jogando...</b></p>";?>
                             </div>
                         </div>
                         <div class="row" style="color: white;">
                             <div class="col-md-6" >
                                 <div class="btn-center" style="margin-top: 5%">
                                     <div style="background-color: #00af00;border: 3px solid #a74d06" class="box">
-                                        <b>0</b>
+                                        <b><?=($game->totalPL1!=null?$game->totalPL1:"0") ?></b>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="btn-center" style="margin-top: 5%">
                                     <div style="background-color: #00af00;border: 3px solid #a74d06" class="box">
-                                        <b>0</b>
+                                        <b><?=($game->totalPL2!=null?$game->totalPL2:"0") ?></b>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row" style="color: white">
                            <div class="btn-center" style="margin-top: 10%">
-                               <button onclick="window.location.href = '<?=URL::toRoute("game/dice")?>'"  class="btn btn-info" <?php if($game->action=="number")echo "disabled"?>>Jogar dados</button>
+                               <?php if($game->playing!=null){?>
+                                   <button onclick="window.location.href = '<?=URL::toRoute("game/dice")?>'"  class="btn btn-info" <?php if($game->action=="number" || $game->playing==-1)echo "disabled"?>>Jogar dados</button>
+                               <?php }else{ ?>
+                                   <button onclick="window.location.href = '<?=URL::toRoute("game/game")?>'"  class="btn btn-danger">Novo Jogo</button>
+                               <?php } ?>
                            </div>
                         </div>
+                        <?php if($game->playing!=null){ ?>
                         <div id="dices">
                             <div class="row">
                                 <div class="btn-center" style="margin-top: 10%">
@@ -81,17 +89,33 @@ $game = Data::get("game");
                                 </div>
                             </div>
                         </div>
+                        <?php }else{?>
+                            <div class="text-center">
+                                <?php if($game->totalPL1==$game->totalPL2){ ?>
+                                <div class="row">
+                                    <h2>Empate</h2>
+                                </div>
+                                <?php }else{ ?>
+                                <div class="row">
+                                    <h2>Você</h2>
+                                </div>
+                                <div class="row">
+                                    <?=($game->totalPL1<$game->totalPL2?"<h1>Venceu</h1>":"<h1>Perdeu</h1>");?>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="col-md-3">
                         <?php
-                        for($i=1;$i<10;$i++)
+                        foreach($game->numbersPlayer2->numbers as $key=>$nums)
                         {
                             ?>
                             <div class="row" style="height: 50%">
 
-                                <div class="box-active-red" style="float: right">
+                                <div class="<?=$nums==false?'box-active-red':'box-blocked'?>" style="float: right">
                                     <div class="bg_number img-circle">
-                                        <span class="number"><?=$i?></span>
+                                        <span class="number"><?=$key?></span>
                                     </div>
                                 </div>
                             </div>
@@ -116,3 +140,16 @@ $game = Data::get("game");
 <?php Layout::includeLayout('footer') ?>
 <script src="<?= Asset::js('game.js')?>"></script>
 
+<script>
+    $(document).ready(function () {
+        <?php
+            if($game->playing==-1){
+                ?>
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+        <?php
+            }
+        ?>
+    })
+</script>

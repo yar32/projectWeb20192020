@@ -170,7 +170,7 @@
     <property name="SearchEverywhereHistoryKey" value="Debugger::barDump&#9;null&#9;null&#10;code sty&#9;ACTION&#9;ChangeCodeStyleScheme&#10;Session::start&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/webapp/view/ajax/user" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -184,19 +184,19 @@
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\projeto\webapp\view\ajax\user" />
+      <recent name="E:\wamp64\www\weblogicmvc\vendor\Pd\Diagnostics" />
+      <recent name="E:\wamp64\www\weblogicmvc\webapp\startup" />
+      <recent name="E:\wamp64\www\weblogicmvc\webapp\view\layout" />
+      <recent name="E:\wamp64\www\weblogicmvc\framework\armoredcore" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\projeto\webapp\view\users" />
       <recent name="E:\wamp64\wamp64\www\weblogicmvc\framework\ArmoredCore\WebObjects" />
       <recent name="E:\wamp64\wamp64\www\weblogicmvc\public\html" />
       <recent name="E:\wamp64\www\weblogicmvc\wlstudio\startup" />
       <recent name="E:\wamp64\www\weblogicmvc\wlstudio\startup\lib" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\wamp64\www\weblogicmvc\vendor\Pd\Diagnostics" />
-      <recent name="E:\wamp64\www\weblogicmvc\webapp\startup" />
-      <recent name="E:\wamp64\www\weblogicmvc\webapp\view\layout" />
-      <recent name="E:\wamp64\www\weblogicmvc\framework\armoredcore" />
-      <recent name="E:\wamp64\www\weblogicmvc\framework" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -270,7 +270,10 @@
       <workItem from="1589463172657" duration="12666000" />
       <workItem from="1589627193504" duration="6569000" />
       <workItem from="1589904069450" duration="6988000" />
-      <workItem from="1589965097583" duration="22667000" />
+      <workItem from="1589965097583" duration="36571000" />
+      <workItem from="1590051602912" duration="20978000" />
+      <workItem from="1590396294445" duration="12941000" />
+      <workItem from="1590481769333" duration="14968000" />
     </task>
     <servers />
   </component>
@@ -293,6 +296,17 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/public/js/game.js</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="masterDetails">
     <states>

@@ -22,12 +22,11 @@ Router::get('user/login',	'UserController/login');
 Router::get('user/logout',	'UserController/logout');
 Router::get('user/register',	'UserController/create');
 Router::get('user/profile',	'UserController/show');
-Router::get('backoffice/allusers',	'UserController/backusers');
-Router::get('backoffice/roles',	'UserController/roles');
 Router::post("user/register","UserController/store");
 Router::post("user/login","UserController/makelogin");
 Router::post("user/edit","UserController/update");
 Router::get("user/ban","UserController/destroy");
+Router::get("user/unban","UserController/edit");
 
 //Game
 Router::get('game/index',	'GameController/index');
@@ -38,7 +37,11 @@ Router::post('game/blocknums',	'GameController/blocknums');
 //ajax
 Router::post('ajax/infouser',"AjaxController/infouser");
 Router::post('ajax/banuser',"AjaxController/banneduser");
+Router::post('ajax/unbanuser',"AjaxController/unbanneduser");
+Router::post('ajax/finduser',"AjaxController/finduser");
 
+//Backoffice
+Router::get('backoffice/allusers',	'UserController/backusers');
 
 
 

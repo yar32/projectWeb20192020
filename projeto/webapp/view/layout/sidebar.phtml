@@ -21,13 +21,7 @@ use ArmoredCore\WebObjects\URL;
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="<?=URL::toRoute("backoffice/home")?>">Home <span class="fa fa-home pull-right"></span></a>
-                        </li>
-                        <li>
-                            <a href="<?=URL::toRoute("backoffice/allusers")?>">Users <span class="fa fa-user pull-right"></span></a>
-                        </li>
-                        <li>
-                            <a href="<?=URL::toRoute("backoffice/roles")?>" >Roles <span class="fa fa-user pull-right"></span></a>
+                            <a href="<?=URL::toRoute("backoffice/allusers")?>" class="active">Users <span class="fa fa-user pull-right"></span></a>
                         </li>
                     </div>
 
@@ -37,13 +31,3 @@ use ArmoredCore\WebObjects\URL;
 
 
 
-<script>
-
-        var local=$(location).attr('pathname');
-        if(local.includes("allusers")){
-            $(".menu li:eq(1) a").addClass("active");
-        }if(local.includes("roles")){
-            $(".menu li:eq(2) a").addClass("active");
-        }
-
-</script>

@@ -5,17 +5,19 @@ use ActiveRecord\Model;
 
 class User extends Model
 {
-    static $belongs_to = array(
-            array('role', 'class_name' => 'Role')
-    );
 
-    static $before_create = array('beforeInsert','encryptpassword'); # new records only
+    static $has_many = array(array("roles"));
+    static $before_create = array('beforeInsert'); # new records only
+    static $before_save = array('encryptpassword');
 
     static $validates_presence_of = array(
         array('name', 'message' => 'Insira o seu nome'),
         array('username', 'message' => 'Insira um username'),
         array('birthdate', 'message' => 'Insira a data de nascimento'),
         array('password', 'message' => 'Insira uma password'),
+    );
+    static $validates_size_of = array(
+        array('password', 'minimum' => 6, 'too_short' => 'Tem de ter no minimo 6 caratéres')
     );
     #Validar se é unico
     static $validates_uniqueness_of = array(
@@ -25,7 +27,7 @@ class User extends Model
 
     static $validates_format_of = array(
         array('email', 'with' =>
-            '/^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/', 'message' => 'Insira um e-mail inválido')
+            '/^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/', 'message' => 'Insira um e-mail válido')
     );
     #Custom validaton
     public function validate()
@@ -36,7 +38,7 @@ class User extends Model
    }
     //Don't work
     /*public function set_password($plaintext) {
-        $this->password = md5($plaintext);
+        $this->encrypted_password = md5($plaintext);
     }*/
 
     #Before Insert in databese
@@ -47,7 +49,7 @@ class User extends Model
     }
 
     public function encryptpassword(){
-        $this->password=md5($this->password);
+         $this->password=md5($this->password);
     }
     #End Insert
 
@@ -62,6 +64,9 @@ class User extends Model
             return false;
         }
         return true;
+    }
+    public function readPassword($password){
+        return md5($password);
     }
 
 }
