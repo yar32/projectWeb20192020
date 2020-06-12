@@ -1,8 +1,14 @@
 <?php
+
+use ArmoredCore\WebObjects\Data;
 use ArmoredCore\WebObjects\Layout;
 use ArmoredCore\WebObjects\URL;
 
-Layout::includeLayout('header') ?>
+Layout::includeLayout('header');
+$error=Data::get("error");
+$ban=Data::get("ban");
+
+?>
 
 	<!-- container -->
 	<div class="container">
@@ -19,8 +25,17 @@ Layout::includeLayout('header') ?>
 						<div class="panel-body">
 							<h3 class="thin text-center">Entrar na sua conta</h3>
 							<p class="text-center text-muted">Caso ainda não tenha conta podara  <a href="<?=Url::toRoute("user/register")?>">Registar-se</a> aqui, basta preencher os dados que lhe são pedidos. </p>
-							<hr>
-
+                            <hr>
+                            <?php if($error!=0){?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <?php if($error==2){?>
+                                <p><i class="fa fa-exclamation-circle fa-2x" style="color: red"></i> Você foi banido</p>
+                                <?php }else{ ?>
+                                <p><i class="fa fa-exclamation-circle fa-2x" style="color: red"></i> Verifique se inseriu os dados corretamente</p>
+                                <?php } ?>
+                            </div>
+                            <?php } ?>
 							<form action="<?=URL::toRoute("user/login")?>" method="post">
 								<div class="top-margin">
 									<label>Username <span class="text-danger">*</span></label>

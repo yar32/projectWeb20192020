@@ -48,7 +48,7 @@ $game = Data::get("game");
 
                             <div class="col-md-6">
                                 <img src="<?=Asset::image("computer.png")?>"><br>
-                                <?php if($game->playing!=1) echo "<p class='text-center'><b>Jogando...</b></p>";?>
+                                <?php if($game->playing==-1) echo "<p class='text-center'><b>Jogando...</b></p>";?>
                             </div>
                         </div>
                         <div class="row" style="color: white;">
