@@ -1,0 +1,20 @@
+<?php
+
+use ArmoredCore\WebObjects\Data;
+
+$erros=Data::get("errors");
+
+if($erros==true){ ?>
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p><i class="fa fa-exclamation-circle fa-2x" style="color: red"></i> Você inserio os dados mal porfavor tente outravez</p>
+    </div>
+<?php }else{?>
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p><i class="fa fa-info-circle fa-2x" style="color: dodgerblue"></i> Alterações feitas com sucesso</p>
+    </div>
+    <?php
+
+
+} ?>

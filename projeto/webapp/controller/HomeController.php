@@ -28,14 +28,13 @@ class HomeController extends BaseController
         $top = Historygame::find('all',
             array(
                 "select"=>"*,SUM(points) as sumpoints",
-                "condition"=>"gamestate=1",
-                "group"=>"iduser",
+                "group"=>"user_id",
                 "limit"=>10,
                 "order"=>"sumpoints desc"
             ));
-        print_r($top);
-        die();
-        return View::make('home.top');
+        //print_r($top);
+        //die();
+        return View::make('home.top',["top"=>$top]);
     }
 
 

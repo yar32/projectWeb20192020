@@ -11,9 +11,9 @@ use ArmoredCore\WebObjects\URL;
     <meta charset="utf-8">
     <meta name="viewport"    content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author"      content="Silvio Priem Mendes, PhD">
+    <meta name="author"      content="Yaroslav Antonenko">
 
-    <title>Weblogic MVC</title>
+    <title>Shut the box</title>
 
     <?=AssetBundler::css()?>
 
@@ -30,7 +30,14 @@ use ArmoredCore\WebObjects\URL;
     <script src="<?= Asset::js('respond.min.js')?>"></script>
     <![endif]-->
 </head>
-
+<style>
+    body{
+        background-image: url("<?=Asset::image('bg.jpg')?>");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
 <body class="home">
 <!-- Fixed navbar -->
 <div class="navbar navbar-inverse navbar-fixed-top headroom" >
@@ -38,7 +45,7 @@ use ArmoredCore\WebObjects\URL;
         <div class="navbar-header">
             <!-- Button for smallest screens -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            <a class="navbar-brand" href="<?= URL::toRoute('home/index')?>"><img src="<?= Asset::image('logo.png')?>" alt="WEBlogic MVC"></a>
+            <a class="navbar-brand" href="<?= URL::toRoute('home/index')?>"><img src="<?= Asset::image('logo.png')?>" alt="Shut the box"></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
@@ -49,7 +56,10 @@ use ArmoredCore\WebObjects\URL;
                     ?>
                     <li><a href="<?= URL::toRoute('user/profile',Session::get("userid"))?>">Welcome <?=User::find(Session::get("userid"))->username?></a></li>
                     <li><a class="btn" href="<?= URL::toRoute('user/logout')?>">LOGOUT </a></li>
+                    <?php  if(Session::get("role")=="ADMIN" && strpos($_SERVER["REQUEST_URI"],"backoffice") === false) { ?>
+                    <li><a class="btn" href="<?= URL::toRoute('backoffice/allusers')?>">Backoffice</a></li>
                     <?php
+                    }
                 }
                 else
                 {

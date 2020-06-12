@@ -2,12 +2,18 @@
 use ArmoredCore\WebObjects\Asset;
 use ArmoredCore\Facades\AssetBundler;
 use ArmoredCore\WebObjects\URL;
+
+$url=$_SERVER["REQUEST_URI"];
 ?>
 <head>
     <link rel="stylesheet" href="<?= Asset::css('/sidebar.css')?>" media="screen" >
     <script src="<?= Asset::js("sidebar.js")?>"></script>
 </head>
-
+<style>
+    body{
+        background-image: none;
+    }
+</style>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -21,7 +27,10 @@ use ArmoredCore\WebObjects\URL;
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="<?=URL::toRoute("backoffice/allusers")?>" class="active">Users <span class="fa fa-user pull-right"></span></a>
+                            <a href="<?=URL::toRoute("backoffice/allusers")?>" <?=(strpos($url,"allusers")!==false?'class="active"':"")?>>Users <span class="fa fa-user pull-right"></span></a>
+                        </li>
+                        <li>
+                            <a href="<?=URL::toRoute("backoffice/alladmins")?>" <?=(strpos($url,"alladmins")!==false?'class="active"':"")?>>Admins <span class="fa fa-user pull-right"></span></a>
                         </li>
                     </div>
 

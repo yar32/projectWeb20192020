@@ -12,12 +12,13 @@ class UserController extends BaseController implements ResourceControllerInterfa
 {
     public function login(){
         if(!Session::has("userid"))
-            return View::make("users.login");
+            return View::make("users.login",["error"=>0,"ban"=>false]);
         else
             return Redirect::toRoute("home/index");
     }
     public function makelogin(){
 
+        $error=1;
         $user=User::find_by_username(Post::get("username"));
         if(!empty($user)){
             $ecrypted_password=$user->readPassword(Post::get("password"));
@@ -25,26 +26,24 @@ class UserController extends BaseController implements ResourceControllerInterfa
             {
                 if($user->activeted == 1)
                 {
-                    $this->userSessions($user->iduser,"role");
+                    $this->userSessions($user->iduser,$user->role->name);
                     return Redirect::toRoute("home/");
+                }
+                else{
+                    $error=2;
+
                 }
 
             }
         }
-        $errors["empty"]="Tem de preencher os campos";
-        return View::make("users.login");
+        return Redirect::flashToRoute("user/login",["error"=>$error]);
     }
     public function logout(){
         Session::destroy();
         return Redirect::toRoute("home/");
     }
 
-    public function backusers(){
-        $users=User::all();
-        //\Tracy\Debugger::barDump($users->roles);
-        return View::make("backoffice.users.allusers",["users"=>$users]);
 
-    }
 
 
     /**
@@ -110,12 +109,11 @@ class UserController extends BaseController implements ResourceControllerInterfa
         if($user->is_valid() && $user->validadePassword(Post::get("password"),Post::get("confpassword"))){
             $user->save();
             $user=User::find_by_username($user->username);
-            $this->userSessions($user->iduser,"User");
+            $this->userSessions($user->iduser,$user->role->name);
             return Redirect::toRoute("home/index");
         }
         else{
-            //$errors["confpassword"]=$user->errors->on("confpassword");
-            //$errors["birthdate"]=$user->errors->on("birthdate");
+            \Tracy\Debugger::barDump($user->errors);
             return Redirect::flashToRoute("user/register",["user"=>$user]);
         }
 
@@ -123,8 +121,11 @@ class UserController extends BaseController implements ResourceControllerInterfa
 
     public function show($id)
     {
+
         $user = User::find($id);
-        return View::make("users.profile",["user"=>$user]);
+        $games=$user->gameinfo();
+        $position=$user->getposition();
+        return View::make("users.profile",["user"=>$user,"games"=>$games,"position"=>$position]);
     }
 
     public function edit($id)
@@ -160,19 +161,18 @@ class UserController extends BaseController implements ResourceControllerInterfa
             {
                 if($user->validadePassword(Post::get("password"),Post::get("confpassword"))){
                     $user->save();
-                    return Redirect::flashToRoute("user/profile",["user"=>$user],$id);
+                    return View::make("ajax.user.notifyedit",["errors"=>false]);
                 }
                 else
                 {
                     $errors["password"]="Tem algum erro";
-                    return Redirect::flashToRoute("user/profile",["user"=>$user,"errors"=>$errors],$id);
+                    return View::make("ajax.user.notifyedit",["errors"=>true]);
                 }
             }
             $user->save();
-            return Redirect::flashToRoute("user/profile",["user"=>$user],$id);
+            return View::make("ajax.user.notifyedit",["errors"=>false]);
         }
-        $errors["password"]="Tem algum erro";
-        return Redirect::flashToRoute("user/profile",["user"=>$user,"errors"=>$errors],$id);
+        return View::make("ajax.user.notifyedit",["errors"=>true]);
     }
 
     public function destroy($id)
@@ -186,6 +186,6 @@ class UserController extends BaseController implements ResourceControllerInterfa
 
     private function userSessions($userid,$role){
         Session::set("userid",$userid);
-        Session::set("role",$role);
+        Session::set("role", strtoupper($role));
     }
 }

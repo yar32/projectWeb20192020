@@ -4,6 +4,8 @@ use ArmoredCore\WebObjects\Asset;
 use ArmoredCore\WebObjects\Data;
 
 $user= Data::get("user");
+$games= Data::get("games");
+$position= Data::get("position");
 ?>
 <div class="modal-header">
     <h5 class="modal-title" id="InfoUserLabel"><?=$user->username?></h5>
@@ -21,6 +23,34 @@ $user= Data::get("user");
             <tr>
                 <th>Email:</th>
                 <td><?=$user->email?></td>
+            </tr>
+            <tr>
+                <th>Data Nascimento:</th>
+                <td><?=$user->birthdate->format("d-m-Y")?></td>
+            </tr>
+            <tr>
+                <th>Role:</th>
+                <td><?=$user->role->name?></td>
+            </tr>
+            <tr>
+                <th>Jogos:</th>
+                <td><?= count($user->historygame)?></td>
+            </tr>
+            <tr>
+                <th>Vitorias:</th>
+                <td><?= $games["wins"]?></td>
+            </tr>
+            <tr>
+                <th>Empates:</th>
+                <td><?= $games["lose"]?></td>
+            </tr>
+            <tr>
+                <th>Derrotas:</th>
+                <td><?= $games["draw"]?></td>
+            </tr>
+            <tr>
+                <th>Lugar:</th>
+                <td><?= $position?></td>
             </tr>
         </tbody>
     </table>

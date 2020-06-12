@@ -40,3 +40,17 @@ function searchuser(url) {
         $("#allusers tbody").html(msg);
     });
 }
+
+function edituser(url) {
+    $.ajax({
+        url:url,
+        method:"post",
+        data: $("#formEditUser").serialize()
+    }).done(function (msg) {
+        $("#closeModalEditUser").click();
+        $("#notify").html(msg);
+        if($("#notify div").hasClass("alert-success")){
+            window.location.reload();
+        }
+    });
+}

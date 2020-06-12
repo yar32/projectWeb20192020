@@ -80,33 +80,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>ROUTER ERROR: URL Route mismatch.</find>
-      <find>render</find>
-      <find>HQHigh</find>
-      <find>3.</find>
-      <find>start</find>
-      <find>home@</find>
-      <find>toroute</find>
-      <find>die</find>
-      <find>torou</find>
-      <find>chart</find>
-      <find>Profiler In</find>
-      <find>conne</find>
-      <find>define</find>
-      <find>$appDir</find>
-      <find>requ</find>
-      <find>bg_h</find>
-      <find>op</find>
-      <find>routingRule</find>
-      <find>webl</find>
-      <find>PDO</find>
-      <find>img</find>
-      <find>echo</find>
-      <find>Debugger::barDump</find>
-    </findStrings>
-  </component>
   <component name="PhpTemplates">
     <option name="NEW_PHP_FILE_LAST_EXTENSION" value="phtml" />
   </component>
@@ -274,6 +247,10 @@
       <workItem from="1590051602912" duration="20978000" />
       <workItem from="1590396294445" duration="12941000" />
       <workItem from="1590481769333" duration="14968000" />
+      <workItem from="1590608432207" duration="962000" />
+      <workItem from="1590655312168" duration="15020000" />
+      <workItem from="1590676720867" duration="6474000" />
+      <workItem from="1591261264986" duration="12557000" />
     </task>
     <servers />
   </component>
@@ -304,6 +281,10 @@
           <url>file://$PROJECT_DIR$/public/js/game.js</url>
           <line>2</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/webapp/view/backoffice/errors/403.phtml</url>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -32,23 +32,22 @@ ErrMgr::attach($user);
                             <form action="<?=URL::toRoute("user/register")?>" method="post">
                                 <div class="top-margin">
                                     <label>Nome Completo <span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control">
+                                    <input type="text" name="name" class="form-control" value="<?=$user->name?>">
                                     <?= ErrMgr::bind('name') ?>
                                 </div>
                                 <div class="top-margin">
                                     <label>Data Nascimento <span class="text-danger">*</span></label>
-                                    <input type="date" name="birthdate" class="form-control">
+                                    <input type="date" name="birthdate" class="form-control" value="<?=(!empty($user->birthdate) ?$user->birthdate->format("Y-m-d"):"")?>">
                                     <?= ErrMgr::bind('birthdate') ?>
-                                    <?php if($user->errors!= null)echo $user->errors->on("birthdate") ?>
                                 </div>
                                 <div class="top-margin">
                                     <label>Username <span class="text-danger">*</span></label>
-                                    <input type="text" name="username" class="form-control">
+                                    <input type="text" name="username" class="form-control" value="<?=$user->username?>">
                                     <?= ErrMgr::bind('username') ?>
                                 </div>
                                 <div class="top-margin">
                                     <label>Email <span class="text-danger">*</span></label>
-                                    <input type="email" name="email" class="form-control">
+                                    <input type="email" name="email" class="form-control" value="<?=$user->email?>">
                                     <?= ErrMgr::bind('email') ?>
                                 </div>
                                 <div class="top-margin">
@@ -59,9 +58,6 @@ ErrMgr::attach($user);
                                 <div class="top-margin">
                                     <label>Confirma password <span class="text-danger">*</span></label>
                                     <input type="password" name="confpassword" class="form-control">
-                                    <?php if(is_array($errors))if(!empty($errors["confpassword"]))echo $user->errors->on("confpassword") ?>
-                                    <?= ErrMgr::bind('confpassword') ?>
-
                                 </div>
 
                                 <hr>

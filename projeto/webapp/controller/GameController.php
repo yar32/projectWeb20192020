@@ -40,7 +40,7 @@ class GameController extends BaseController
                 if(!$game->canplay()){
                     $game->finish();
                     //Add to History
-                    /*$history= new Historygame();
+                    $history= new Historygame();
                     if($game->totalPL1 < $game->totalPL2)
                     {
                         $history->gamestate=1;
@@ -57,10 +57,10 @@ class GameController extends BaseController
                         $history->gamestate=0;
                         $history->points=0;
                     }
-                    $history->iduser=Session::get("userid");
+                    $history->user_id=Session::get("userid");
                     if($history->is_valid()){
                         $history->save();
-                    }*/
+                    }
 
 
 

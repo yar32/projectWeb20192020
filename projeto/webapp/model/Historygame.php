@@ -5,7 +5,8 @@ use ActiveRecord\Model;
 
 class Historygame extends Model
 {
-    static $before_create = array('insert');
+    static $belongs_to = array(array('user'));
+    static $before_create = array('insertDate'); # new records only
     static $validates_presence_of = array(
         array('points'),
         array('gamestate'),
@@ -15,7 +16,9 @@ class Historygame extends Model
         array('gamestate', 'only_integer' => true),
     );
     //Todo: Format
-    public function insert(){
+    public function insertDate(){
         $this->date=date("Y-m-d H:i:s");
+        //\Tracy\Debugger::barDump($this);
+        //die();
     }
 }
