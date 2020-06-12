@@ -107,6 +107,7 @@ class UserController extends BaseController implements ResourceControllerInterfa
 
         //Todo: erro no validade unique
         if($user->is_valid() && $user->validadePassword(Post::get("password"),Post::get("confpassword"))){
+            $user->encryptpassword();
             $user->save();
             $user=User::find_by_username($user->username);
             $this->userSessions($user->iduser,$user->role->name);
@@ -160,6 +161,7 @@ class UserController extends BaseController implements ResourceControllerInterfa
             if(!empty(Post::get("password")))
             {
                 if($user->validadePassword(Post::get("password"),Post::get("confpassword"))){
+                    $user->encryptpassword();
                     $user->save();
                     return View::make("ajax.user.notifyedit",["errors"=>false]);
                 }

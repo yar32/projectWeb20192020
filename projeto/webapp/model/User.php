@@ -12,7 +12,7 @@ class User extends Model
 
     #Save
     static $before_create = array('beforeInsert'); # new records only
-    static $before_save = array('encryptpassword');
+    //static $before_save = array('encryptpassword');
     #End Save
 
 
@@ -55,7 +55,7 @@ class User extends Model
     }
 
     public function encryptpassword(){
-         $this->password=md5($this->password);
+        $this->password=md5($this->password);
     }
     #End Insert
 
@@ -63,9 +63,9 @@ class User extends Model
     public function validadePassword($password,$confpassword){
         if ($password != $confpassword)
         {
-            \Tracy\Debugger::dump($confpassword);
+            #\Tracy\Debugger::dump($confpassword);
             $this->errors->add('password', "As password não são identicas");
-            \Tracy\Debugger::dump($this->errors);
+            #\Tracy\Debugger::dump($this->errors);
 
             return false;
         }
